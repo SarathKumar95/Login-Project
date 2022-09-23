@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib import  messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 
 # Create your views here.
@@ -23,13 +23,21 @@ def signup(request):
         pass1 = request.POST['pass1']
         pass2 = request.POST['pass2']
 
-        my_user = User.objects.create_user(username, email, pass1)
+        if pass1 == pass2:
 
-        my_user.save()
+            if User.objects.filter(username=username).exists():
+                messages.info(request, 'Username Taken. Please try some other username')
+            
+            my_user = User.objects.create_user(username, email, pass1)
 
-        messages.success(request, 'Your account has been created!')
+            my_user.save()
 
-        return redirect(home)
+            messages.success(request, 'Your account has been created!')
+
+            return redirect(home)
+        
+        else:
+            print("Password don't match")
 
 
 def signin(request):
@@ -53,3 +61,6 @@ def signin(request):
             return redirect('/')
 
 
+def signout(request):
+    logout(request)
+    return render(request, 'index.html')
