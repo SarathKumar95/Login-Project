@@ -8,6 +8,10 @@
 
 <h2>Hey! What would you like to do ?</h2>
 
+{% for message in messages %}
+    <p>{{message}}</p>
+{% endfor %}
+
 <a href="{% url 'signup' %}"><button type="submit">Sign Up</button></a>
 <a href="{% url 'signin' %}"><button type="submit">Sign In</button></a>
 </body>

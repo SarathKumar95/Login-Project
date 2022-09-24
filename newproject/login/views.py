@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib import  messages
 from django.contrib.auth import authenticate, login, logout
-
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -23,23 +23,33 @@ def signup(request):
         pass1 = request.POST['pass1']
         pass2 = request.POST['pass2']
 
+        
+
         if pass1 == pass2:
 
             if User.objects.filter(username=username).exists():
                 messages.info(request, 'Username Taken. Please try some other username')
+                return redirect('signup')
             
-            my_user = User.objects.create_user(username, email, pass1)
+            elif User.objects.filter(email=email).exists():
+                messages.info(request, 'A user already exists on that email address.')
+                return redirect('signup')
 
-            my_user.save()
+            else:
+                
+                my_user = User.objects.create_user(username, email, pass1)
+                
+                my_user.save()
+                
+                messages.success(request, 'Your account has been created!.You can log in now.')
 
-            messages.success(request, 'Your account has been created!')
-
-            return redirect(home)
+                return redirect(home)
         
         else:
-            print("Password don't match")
+            messages.info(request,"Passwords don't match.")
+            return redirect('signup')
 
-
+@login_required()
 def signin(request):
 
     if request.method == "GET":
@@ -57,8 +67,9 @@ def signin(request):
             return render(request,'home.html')
 
         else:
-            print('Bad credentials')
-            return redirect('/')
+            messages.info(request,'Check username or password.')
+            print('User does not exist')
+            return redirect('signin')
 
 
 def signout(request):
