@@ -49,7 +49,7 @@ def signup(request):
             messages.info(request,"Passwords don't match.")
             return redirect('signup')
 
-@login_required()
+
 def signin(request):
 
     if request.method == "GET":

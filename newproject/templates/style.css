@@ -1,0 +1,20 @@
+body{
+    background: url(./images/teemu-paananen-OOE4xAnBhKo-unsplash.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.navbar{
+    background : url(./images/teemu-paananen-OOE4xAnBhKo-unsplash.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
+
+.navbar-nav li a{
+    color: azure;
+}
+
+.navbar-brand{
+    color: azure;
+}
