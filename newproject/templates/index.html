@@ -14,10 +14,14 @@
 <div class="form-container container text-center">
 
     
+        <div class="message-holder mt-3">
 
-        {% for message in messages %}
-        <p>{{message}}</p>
-        {% endfor %}
+            {% for message in messages %}
+                <p class="message">{{message}}</p>
+            {% endfor %}
+
+        </div>
+        
 
 
         <form action="login" method="POST">

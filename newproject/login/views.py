@@ -29,7 +29,7 @@ def signup(request):
         if pass1 == pass2:
 
             if User.objects.filter(username=username).exists():
-                messages.info(request, 'Username Taken. Please try some other username')
+                messages.error(request, 'Username Taken. Please try some other username')
                 return redirect('signup')
             
             elif User.objects.filter(email=email).exists():
@@ -47,7 +47,7 @@ def signup(request):
                 return redirect('index')
         
         else:
-            messages.info(request,"Passwords don't match.")
+            messages.info(request,"Passwords don't match.Try again.")
             return redirect('signup')
 
 

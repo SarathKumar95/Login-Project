@@ -79,6 +79,12 @@ h3{
 
 /* home page here */
 
+#logout-link:hover{
+    transform: scale(2);
+}
 
+.message{
+    color: rgb(219, 80, 80);
+}
 
 /* home page ends */
