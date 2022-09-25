@@ -1,0 +1,41 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+
+body{
+    background:url('./images/img-3.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.form-container{
+    display: block;
+    margin-top: 200px;
+    border: 2px solid black;
+    border-radius: 6px;
+    width: fit-content;
+    height: 400px;
+    background-color: black;
+    opacity: 95%;
+}
+
+.btn{
+    color:rgb(125, 192, 125);
+    border: 1px solid rgb(125, 192, 125) ;
+}
+
+.btn:hover{
+    background-color: rgb(125, 192, 125);
+    color: black;
+}
+
+.form-container div input{
+    width: 250px;
+    height: 40px;
+    border-radius: 5px;
+
+}

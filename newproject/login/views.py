@@ -97,7 +97,7 @@ def home(request):
 def signout(request):
     if 'test' in request.session:
         request.session.flush()
-        return render(request, 'index.html')
+    return render(request, 'index.html')
     
-    else:
-        print("Nop")
+    #else:
+        #print("Nop")
