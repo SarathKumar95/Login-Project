@@ -25,8 +25,8 @@ body{
     margin-top: 200px;
     border: 2px solid black;
     border-radius: 6px;
-    width: fit-content;
-    height: 400px;
+    width: 400px;
+    height: 420px;
     background-color: black;
     opacity: 90%;
 }
