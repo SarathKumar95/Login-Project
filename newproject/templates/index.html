@@ -12,7 +12,21 @@
     <p>{{message}}</p>
 {% endfor %}
 
-<a href="{% url 'signup' %}"><button type="submit">Sign Up</button></a>
-<a href="{% url 'signin' %}"><button type="submit">Sign In</button></a>
+
+<form action="login" method="POST">
+
+    {% csrf_token %}
+
+    <input type="text" name = uname placeholder="Enter your username" >
+    <input type="password" name = "password" placeholder="Enter your password">
+
+    <button type="submit">Signin</button>
+
+
+
+</form>
+
+<a href="{% url 'signup' %}">Not registered yet? Click here.</a>
+
 </body>
 </html>
