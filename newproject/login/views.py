@@ -59,10 +59,12 @@ def signin(request):
 
         user = authenticate(username = username, password = password)
 
+        context = {"username":username}
+
         if user is not None:
                 request.session['username'] = 'temp'
-                print("Username is " + request.session['username'])
-                return render(request,'home.html')
+                print("Username is " + username)
+                return render(request,'home.html',context)
             
            # else:
                 #print("nop!")
