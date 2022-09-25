@@ -1,4 +1,3 @@
-import re
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User
@@ -53,14 +52,6 @@ def signup(request):
 
 def signin(request):
 
-    if 'test' in request.session:
-        return redirect(home)
-
-
-    if request.method == "GET":
-        return render(request, 'index.html')
-
-
     if request.method == 'POST':
 
         username = request.POST['uname']
@@ -69,7 +60,8 @@ def signin(request):
         user = authenticate(username = username, password = password)
 
         if user is not None:
-                request.session['username'] = 'test'
+                request.session['username'] = 'temp'
+                print("Username is " + request.session['username'])
                 return render(request,'home.html')
             
            # else:
@@ -81,12 +73,13 @@ def signin(request):
         else:
             messages.info(request,'Check username or password.')
             print('User does not exist')
-            return redirect('index')
+    
+    return render(request,'index.html')
 
 
 def home(request):
 
-    if 'test' in request.session:
+    if 'temp' in request.session:
         return render(request, 'home.html')
 
     else:
@@ -95,7 +88,7 @@ def home(request):
 
 
 def signout(request):
-    if 'test' in request.session:
+    if 'username' in request.session:
         request.session.flush()
     return render(request, 'index.html')
     
