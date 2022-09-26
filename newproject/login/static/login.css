@@ -15,7 +15,6 @@
 
 body{
     background:url('./images/img-3.jpg');
-    background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -85,6 +84,11 @@ h3{
 
 .message{
     color: rgb(219, 80, 80);
+}
+
+.navbar{
+    background-color: black;
+    opacity: 95%;
 }
 
 /* home page ends */
