@@ -1,9 +1,10 @@
+from urllib import request
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib import  messages
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate,login,logout
+
 
 # Create your views here.
 
@@ -52,33 +53,37 @@ def signup(request):
 
 def signin(request):
 
-    if request.method == 'GET':
-        return render(request,'index.html')
+    if 'username' in request.session:
+        return redirect(home)
 
     if request.method == 'POST':
 
         username = request.POST['uname']
         password = request.POST['password']
 
+        print("Username is",username)
+
         user = authenticate(username = username, password = password)
 
-        context = {"username":username}
-
         if user is not None:
-                return render(request,'home.html',context)
+                request.session['username'] = username
+                return redirect(home)
             
         else:
             messages.info(request,'Check username or password.')
             print('User does not exist')
             return render(request,'index.html')
-
+    
+    return render(request,'index.html')
 
 def home(request):
-    return render(request,'home.html')
+    if 'username' in request.session:
+        return render(request,'home.html')
+    return redirect(signin)
 
 
 
 def signout(request):
-        logout(request)
-        return render(request, 'index.html')
-    
+    if 'username' in request.session:
+        request.session.flush()
+    return redirect(signin)
