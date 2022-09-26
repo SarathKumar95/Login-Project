@@ -52,6 +52,9 @@ def signup(request):
 
 def signin(request):
 
+    if request.method == 'GET':
+        return render(request,'index.html')
+
     if request.method == 'POST':
 
         username = request.POST['uname']
@@ -62,37 +65,20 @@ def signin(request):
         context = {"username":username}
 
         if user is not None:
-                request.session['username'] = 'temp'
-                print("Username is " + username)
                 return render(request,'home.html',context)
             
-           # else:
-                #print("nop!")
-            
-
-            
-
         else:
             messages.info(request,'Check username or password.')
             print('User does not exist')
-    
-    return render(request,'index.html')
+            return render(request,'index.html')
 
 
 def home(request):
-
-    if 'temp' in request.session:
-        return render(request, 'home.html')
-
-    else:
-        return redirect('index')
+    return render(request,'home.html')
 
 
 
 def signout(request):
-    if 'username' in request.session:
-        request.session.flush()
-    return render(request, 'index.html')
+        logout(request)
+        return render(request, 'index.html')
     
-    #else:
-        #print("Nop")
