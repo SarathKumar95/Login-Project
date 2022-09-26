@@ -8,10 +8,6 @@ from django.contrib.auth import authenticate,login,logout
 
 # Create your views here.
 
-def index(request):
-    return render(request, 'index.html')
-
-
 def signup(request):
     if request.method == "GET":
         return render(request, 'signup.html')
@@ -44,7 +40,7 @@ def signup(request):
                 
                 messages.success(request, 'Your account has been created!.You can log in now.')
 
-                return redirect('index')
+                return redirect('signin')
         
         else:
             messages.info(request,"Passwords don't match.Try again.")
