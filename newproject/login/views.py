@@ -1,9 +1,8 @@
-from urllib import request
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib import  messages
-from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth import authenticate
+from django.views.decorators.cache import cache_control
 
 
 # Create your views here.
@@ -46,7 +45,7 @@ def signup(request):
             messages.info(request,"Passwords don't match.Try again.")
             return redirect('signup')
 
-
+@cache_control(no_cache=True,must_revalidate=True,no_store=True)
 def signin(request):
 
     if 'username' in request.session:
@@ -74,6 +73,8 @@ def signin(request):
     
     return render(request,'index.html')
 
+
+@cache_control(no_cache=True,must_revalidate=True,no_store=True)
 def home(request):
     if 'username' in request.session:
         temp = {"username":request.session['username']}
