@@ -65,6 +65,8 @@ def signin(request):
                 request.session['username'] = username
                 return redirect(home)
             
+
+            
         else:
             messages.info(request,'Check username or password.')
             print('User does not exist')
@@ -74,7 +76,9 @@ def signin(request):
 
 def home(request):
     if 'username' in request.session:
-        return render(request,'home.html')
+        temp = {"username":request.session['username']}
+        context = {'temp':temp}
+        return render(request,'home.html',context)
     return redirect(signin)
 
 
